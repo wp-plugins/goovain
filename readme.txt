@@ -25,8 +25,10 @@ Note: Need to have a Short Url domain (your.com). The short url domain does not 
 
 == Screenshots ==
 
-1. Shortened URLs
-2. Posts List and Analytics
+1. screenshot-1.jpg
+2. screenshot-2.jpg
+3. screenshot-3.jpg
+4. screenshot-4.jpg
 
 == Change log ==
 = 1.1 =
