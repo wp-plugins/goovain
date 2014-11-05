@@ -25,10 +25,10 @@ Note: Need to have a Short Url domain (your.com). The short url domain does not 
 
 == Screenshots ==
 
-1. screenshot-1.jpg
-2. screenshot-2.jpg
-3. screenshot-3.jpg
-4. screenshot-4.jpg
+1. post edit page
+2. post list page
+3. Document head link
+4. wordpress settings page
 
 == Change log ==
 = 1.1 =
