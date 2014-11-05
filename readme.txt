@@ -5,9 +5,7 @@ Requires at least: 3.0
 Tested up to: 4.0
 Stable tag: 1.0
 
-Uses Google's URL shortener (Goo.gl) to create short links for your WordPress posts, track analytics and allows for Vainity URL.
-
-This plugin does all this without storing any values in the database. Instead it writes the shorturl to a text file and retrieves from said text file.
+Uses Google's URL shortener (Goo.gl) to create short links and convert to Vanity Urls never adding anything to the database.
 
 == Description ==
 
