@@ -31,6 +31,11 @@ Note: Need to have a Short Url domain (your.com). The short url domain does not 
 4. wordpress settings page
 
 == Change log ==
+
+= 1.2 =
+* cleaned code and removed info link on list view.
+
+
 = 1.1 =
 * added options page to change short url without editing code.
 * added text file to store data instead of storing in the database.
