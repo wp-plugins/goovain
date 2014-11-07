@@ -9,6 +9,7 @@ Author URI: http://dementedsugar.com
 */
 function googl_shortlink( $url, $post_id = false ) {
 	global $post;
+  
 	$VainURl = file_get_contents('goo_pref/goo_pref.txt', true);
 
 	if ( ! $post_id && $post ) $post_id = $post->ID;
@@ -57,42 +58,44 @@ add_filter( 'get_shortlink', 'googl_shortlink', 9, 2 );
 function googl_shorten( $url ) {
 
 		$VainURl = file_get_contents('goo_pref/goo_pref.txt', true);
-	$result = wp_remote_post( 'https://www.googleapis.com/urlshortener/v1/url', array(
-		'body' => json_encode( array( 'longUrl' => esc_url_raw( $url ) ) ),
-		'headers' => array( 'Content-Type' => 'application/json' ),
+		$result = wp_remote_post( 'https://www.googleapis.com/urlshortener/v1/url', array(
+			  'body' => json_encode( array( 'longUrl' => esc_url_raw( $url ) ) ),
+			  'headers' => array( 'Content-Type' => 'application/json' ),
 	) );
 
 	// Return the URL if the request got an error.
 	if ( is_wp_error( $result ) )
 		return $url;
 
-	$result = json_decode( $result['body'] );
-	$shortlink = $result->id;
-  	$shortlink =  str_replace( 'goo.gl/', $VainURl, $shortlink );
-	if ( $shortlink )
-		return $shortlink;
-
-	return $url;
-}
+	  $result = json_decode( $result['body'] );
+	  $shortlink = $result->id;
+	  $shortlink =  str_replace( 'goo.gl/', $VainURl, $shortlink );
+	  if ( $shortlink )
+		  return $shortlink;
+  
+	  		return $url;
+	}
 
 function googl_post_columns( $columns ) {
 	$columns['shortlink'] = 'Shortlink';
 	return $columns;
 }
+
 add_filter( 'manage_edit-post_columns', 'googl_post_columns' );
+
 
 function googl_custom_columns( $column ) {
 	if ( 'shortlink' == $column ) {
 
 		$VainURl = file_get_contents('goo_pref/goo_pref.txt', true);
 	 
-	    	$shorturl = wp_get_shortlink(); 
-	  	$shorturl =  str_replace( 'goo.gl/', $VainURl, $shorturl );
-		$shorturl_caption = str_replace( 'http://', '', $shorturl );
-		$shorturl_info = str_replace( 'goo.gl/', 'goo.gl/info/', $shorturl );
-		printf( '<a href="%s">%s</a> (<a href="%s">info</a>)', esc_url( $shorturl ), esc_html( $shorturl_caption ), esc_url( $shorturl_info ) );
+	  $shorturl = wp_get_shortlink(); 
+	  $shorturl = str_replace( 'goo.gl/', $VainURl, $shorturl );
+	  $shorturl_caption = str_replace( 'http://', '', $shorturl );
+	  	printf( '<a href="%s">%s</a> ', esc_url( $shorturl ), esc_html( $shorturl_caption ) );
 	}
 }
+
 add_action( 'manage_posts_custom_column', 'googl_custom_columns' );
 
 function googl_save_post( $post_ID, $post ) {
