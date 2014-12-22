@@ -2,8 +2,8 @@
 Contributors: Aaron DeMent
 Tags: links, twitter, short, url, socialmedia, permalinks, redirect, shorturl, goo.gl
 Requires at least: 3.0
-Tested up to: 4.0
-Stable tag: 1.0
+Tested up to: 4.1
+Stable tag: 1.3
 
 Uses Google's URL shortener (Goo.gl) to create short links and convert to Vanity Urls never adding anything to the database.
 
@@ -31,6 +31,11 @@ Note: Need to have a Short Url domain (your.com). The short url domain does not 
 4. wordpress settings page
 
 == Change log ==
+
+= 1.3 =
+* Ready code for WP 4.1
+* Link fix in settings page.
+
 
 = 1.2 =
 * cleaned code and removed info link on list view.

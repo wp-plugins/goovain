@@ -92,7 +92,7 @@ class GooSettingsPage
 
     public function vanity_input_callback()
     {            
-        $file = WP_PLUGIN_DIR."/gooVain/goo_pref/goo_pref.txt";
+        $file = WP_PLUGIN_DIR."/goovain/goo_pref/goo_pref.txt";
         $current = file_get_contents($file); 
     
         printf('<input type="text" id="vanity_url" name="goo_option_name[vanity_url]" value="'.($current).'" />',
