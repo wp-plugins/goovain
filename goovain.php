@@ -4,7 +4,7 @@ Plugin Name: GooVain
 Plugin URI: https://github.com/ADeMen/
 Description: A simple Goo.gl URL + vanity shortener for WordPress .
 Author: Aaron DeMent
-Version: 1.2
+Version: 1.3
 Author URI: http://dementedsugar.com
 */
 function googl_shortlink( $url, $post_id = false ) {
