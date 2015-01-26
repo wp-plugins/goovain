@@ -3,7 +3,7 @@ Contributors: Aaron DeMent
 Tags: links, twitter, short, url, socialmedia, permalinks, redirect, shorturl, goo.gl
 Requires at least: 3.0
 Tested up to: 4.1
-Stable tag: 1.3
+Stable tag: 1.4
 
 Uses Google's URL shortener (Goo.gl) to create short links and convert to Vanity Urls never adding anything to the database.
 
@@ -31,6 +31,9 @@ Note: Need to have a Short Url domain (your.com). The short url domain does not 
 4. wordpress settings page
 
 == Change log ==
+= 1.4 =
+* added integration with Jetpack share (share daddy)Shortlinks are now used in the jetpack plugin if it is enabled.
+* Added index files to all directories for security.
 
 = 1.3 =
 * Ready code for WP 4.1

@@ -108,3 +108,25 @@ function googl_save_post( $post_ID, $post ) {
 add_action( 'save_post', 'googl_save_post', 10, 2 );
 
 include 'goo_settings.php';
+
+/* jetpack use short link */
+/* Grab the shortlink*/
+function custshortlink( $post ) {
+	global $post;
+
+	if ( !$post )
+		return;
+
+	$post_id = $post->ID;
+	return wp_get_shortlink( $post_id );
+}
+
+/* Enable the plugin only when Jetpack and Sharedaddy are enabled */
+function custshortlink_enable() {
+	if (
+		class_exists( 'Jetpack' ) && method_exists( 'Jetpack', 'get_active_modules' ) && in_array( 'sharedaddy', Jetpack::get_active_modules() )
+		) {
+		add_filter( 'sharing_permalink', 'custshortlink' );
+	}
+}
+add_action( 'plugins_loaded', 'custshortlink_enable' );
