@@ -4,13 +4,14 @@ Plugin Name: GooVain
 Plugin URI: https://github.com/ADeMen/
 Description: A simple Goo.gl URL + vanity shortener for WordPress .
 Author: Aaron DeMent
-Version: 1.4
+Version: 1.5
 Author URI: http://dementedsugar.com
 */
 function googl_shortlink( $url, $post_id = false ) {
 	global $post;
   
 	$VainURl = file_get_contents('goo_pref/goo_pref.txt', true);
+	$googleAPI = file_get_contents('goo_pref/goo_pref2.txt', true);
 
 	if ( ! $post_id && $post ) $post_id = $post->ID;
 	elseif ( $post_id ) $post = get_post( $post_id );
@@ -58,7 +59,9 @@ add_filter( 'get_shortlink', 'googl_shortlink', 9, 2 );
 function googl_shorten( $url ) {
 
 		$VainURl = file_get_contents('goo_pref/goo_pref.txt', true);
-		$result = wp_remote_post( 'https://www.googleapis.com/urlshortener/v1/url', array(
+		$googleAPI = file_get_contents('goo_pref/goo_pref2.txt', true);
+
+		$result = wp_remote_post( add_query_arg( 'key', apply_filters( 'googl_api_key', $googleAPI ), 'https://www.googleapis.com/urlshortener/v1/url' ), array(
 			  'body' => json_encode( array( 'longUrl' => esc_url_raw( $url ) ) ),
 			  'headers' => array( 'Content-Type' => 'application/json' ),
 	) );
@@ -87,7 +90,8 @@ add_filter( 'manage_edit-post_columns', 'googl_post_columns' );
 function googl_custom_columns( $column ) {
 	if ( 'shortlink' == $column ) {
 
-		$VainURl = file_get_contents('goo_pref/goo_pref.txt', true);
+	  $VainURl = file_get_contents('goo_pref/goo_pref.txt', true);
+	  $googleAPI = file_get_contents('goo_pref/goo_pref2.txt', true);
 	 
 	  $shorturl = wp_get_shortlink(); 
 	  $shorturl = str_replace( 'goo.gl/', $VainURl, $shorturl );
@@ -130,3 +134,4 @@ function custshortlink_enable() {
 	}
 }
 add_action( 'plugins_loaded', 'custshortlink_enable' );
+?>

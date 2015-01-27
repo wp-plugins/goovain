@@ -77,7 +77,13 @@ class GooSettingsPage
             'goo-setting-admin', // Page
             'setting_section_id' // Section           
         );      
-    
+            add_settings_field(
+            'google_api', // ID
+            'Google API', // Title 
+            array( $this,'api_input_callback'),
+            'goo-setting-admin', // Page
+            'setting_section_id' // Section           
+        );   
     }
 
     /** 
@@ -86,8 +92,8 @@ class GooSettingsPage
     public function print_section_info()
     {            
 
-        print 'Enter your Vainty URL below (goo.gl/) <br / ><br />DO NOT FORGET THE TRAILING SLASH: <br /><br />';
-
+        print 'Enter your Vainty URL below (goo.gl/) DO NOT FORGET THE TRAILING SLASH, then enter your google API Key';
+        
     }
 
     public function vanity_input_callback()
@@ -100,6 +106,19 @@ class GooSettingsPage
 
          $new_url = $this->options['vanity_url'];
         file_put_contents($file, $new_url);
+    }
+
+
+        public function api_input_callback()
+    {            
+        $api = WP_PLUGIN_DIR."/goovain/goo_pref/goo_pref2.txt";
+        $current_api = file_get_contents($api);
+
+        printf('<input type="text" id="google_api" name="goo_option_name[google_api]" value="'.($current_api).'" />',
+            isset( $this->options['google_api'] ) ? esc_attr( $this->options['google_api']) : '');
+
+         $new_api = $this->options['google_api'];
+        file_put_contents($api, $new_api);
     }
 
 
